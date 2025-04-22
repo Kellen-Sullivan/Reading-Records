@@ -1,53 +1,63 @@
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-{{!-- Create a table --}}
-<table id="books-table">
+<section id="myLibrary">
+    <h1>My Library</h1>
 
-    {{!-- Header section --}}
-    <thead>
+    {{#each data}}
+        {{>bookTemplate}}
+    {{/each}}
+    
+</section>
 
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
+<section id="search">
+    <h1>Find Books</h1>
+
+    {{!-- Search form --}}
+    <form id="search-book-html" method='GET' action='/'>
+        <input type="text" placeholder="Search for a book..." name="searchInput" id="input-html-search">
+        
+        <input type="submit">
+        <a href='/'><button>Reset</button></a>
+    </form>
+
+    {{!-- Books Table--}}
+    <table id="books-table">
+        <thead>
+            <tr>
+                <th>title</th>
+                <th>authors</th>
+                <th>average_rating</th>
+                <th>language_code</th>
+                <th>num_pages</th>
+                <th>ratings_count</th>
+                <th>text_reviews_count</th>
+                <th>publication_date</th>
+                <th>Add Book</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each books}}
+            <tr data-value={{this.bookID}}>
+                <td>{{this.title}}</td>
+                <td>{{this.authors}}</td>
+                <td>{{this.average_rating}}</td>
+                <td>{{this.language_code}}</td>
+                <td>{{this.num_pages}}</td>
+                <td>{{this.ratings_count}}</td>
+                <td>{{this.text_reviews_count}}</td>
+                <td>{{this.publication_date}}</td>
+                <td><button onclick="addUserBook({{this.bookID}})">Add</button></td>
+            </tr>
             {{/each}}
-            <th>delete</th>
-        </tr>
-    </thead>
+        </tbody>
+    </table>
+</section>
 
-    {{!-- Body section --}}
-    <tbody>
 
-        {{!-- For each row, print the bookID, title, author, and words --}}
-        {{#each data}}
-        <tr data-value={{this.bookID}}>
-            <td>{{this.bookID}}</td>
-            <td>{{this.title}}</td>
-            <td>{{this.author}}</td>
-            <td>{{this.words}}</td>
-            <td><button onclick="deleteBook({{this.bookID}})">Delete</button></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-<script src="./js/delete_book.js"></script>
+<script src="./js/add_userBook.js"></script> 
+<script src="./js/delete_userBook.js"></script>
 
-{{!-- Form to add a record to the table--}}
-<form id="add-book-form-ajax">
-    <label for="input-title">Title: </label>
-    <input type="text" name="input-title" id="input-title">
 
-    <label for="input-author">Author: </label>
-    <input type="text" name="input-author" id="input-author">
 
-    <label for="input-words">Words: </label>
-    <input type="number" name="input-words" id="input-words">
-
-    <input type="submit">
-</form>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_book.js"></script>

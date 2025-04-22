@@ -1,0 +1,129 @@
+table, th, td {
+    border: 1px solid;
+}
+
+/* Header Container */
+header {
+    display: flex;
+    justify-content: center; /* Center contents horizontally */
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    border-bottom: 1px solid black;
+  }
+  
+  /* Title */
+  .site-title {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  /* Navigation Links */
+  nav {
+    position: absolute;
+    left: 20px; /* Push to the left side */
+    display: flex;
+    gap: 15px;
+  }
+  
+  /* Links styling */
+  nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  /* Hover effect */
+  nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background-color: black;
+    transition: width 0.3s ease;
+  }
+  
+  nav a:hover::after {
+    width: 100%;
+  }
+  
+  .book {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .book-contents {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+    transition: transform 0.2s ease;
+  }
+  
+  .book-contents:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Book image */
+  .book-image-container img {
+    width: 120px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Book info */
+  .book-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  /* Title styling */
+  .book-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Authors and other info */
+  .book-authors {
+    font-size: 1rem;
+    color: #666;
+  }
+
+  .progress-bar {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    height: 16px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4caf50, #81c784);
+    width: 0%;
+    transition: width 0.4s ease-in-out;
+    border-radius: 10px 0 0 10px;
+  }
+  
+  .progress-labels {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 4px;
+  }
+  

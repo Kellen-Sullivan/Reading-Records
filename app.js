@@ -17,20 +17,64 @@ app.set('view engine', '.hbs')
 
 // ----------------------------------------------------------------------------- ROUTES ----------------------------------------------------------------------------------------
 
-app.get('/', function(req, res)
-{
-    let query1 = 'SELECT * FROM books LIMIT 10;'
-    db.pool.query(query1, function(error, rows, fields){
-        res.render('index', {data: rows})
-    })
-})                                      
+app.get('/', function(req, res) {
+    let userID = 1; // default to user 1 for now
 
-app.post('/add-book-ajax', function(req, res)
+    let query1 = `
+        SELECT b.bookID, b.title, b.authors, b.num_pages, ub.pages_read, ub.is_complete 
+        FROM UserBooks ub
+        JOIN Books b ON ub.bookID = b.bookID
+        WHERE ub.userID = ? 
+        LIMIT 10;
+    `;
+
+    if (req.query.searchInput === undefined) {
+        query2 = `SELECT * FROM Books LIMIT 3;`
+    }
+    else {
+        query2 = `SELECT * FROM Books WHERE title LIKE '%${req.query.searchInput}%' OR authors LIKE '%${req.query.searchInput}%';`
+    }
+
+    db.pool.query(query2, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.status(500).send("Database error");
+            return;
+        }
+
+        // Add progressPercentage for each user book
+        let books = rows.map(function(book) {
+            let newBook = {
+                bookID: book.bookID,
+                title: book.title,
+                authors: book.authors,
+                num_pages: book.num_pages,
+                pages_read: book.pages_read,
+                is_complete: book.is_complete === 1 ? "complete" : "incomplete", // if 1, passes complete, if 0, passes incomplete
+                progressPercentage: Math.round((book.pages_read / book.num_pages) * 100)
+            };
+            return newBook;
+        });
+
+        console.log(books)
+
+        db.pool.query(query1, [userID], function(error, rows, fields) {
+            if (error) {
+                console.log(error);
+                res.status(500).send("Database error");
+                return;
+            }
+            res.render('index', { data: rows, books:books });
+        });
+    })
+});                                     
+
+app.post('/add-userBook-ajax', function(req, res)
 {
     let data = req.body
     // deal with null values here if necessary later
 
-    let query1 = `INSERT INTO Books (title, author, words) VALUES ('${data.title}', '${data.author}', ${data.words});`
+    let query1 = `INSERT INTO UserBooks (userID, bookID) VALUES (${data.userID}, ${data.bookID});`
     db.pool.query(query1, function(error, rows, fields){
         // Check to see if there was an error
         if (error) {
@@ -41,8 +85,8 @@ app.post('/add-book-ajax', function(req, res)
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
-            let query2 = `SELECT * FROM Books;`
+            // If there was no error, perform a SELECT * on books
+            let query2 = `SELECT * FROM UserBooks;`
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -62,11 +106,11 @@ app.post('/add-book-ajax', function(req, res)
     })
 });
 
-app.delete('/delete-book-ajax/', function(req,res,next){
+app.delete('/delete-userBook-ajax/', function(req,res,next){
 
     let data = req.body
     let bookID = parseInt(data.id)
-    let deleteBook = `DELETE FROM Books WHERE bookID = ?` 
+    let deleteBook = `DELETE FROM UserBooks WHERE bookID = ?` 
   
     // Run the delete query
     db.pool.query(deleteBook, [bookID], function(error, rows, fields){
