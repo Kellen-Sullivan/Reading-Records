@@ -4,10 +4,12 @@
 <section id="myLibrary">
     <h1>My Library</h1>
 
-    {{#each data}}
+    {{>bookshelfTemplate}}
+
+    {{!-- {{#each books}}
         {{>bookTemplate}}
-    {{/each}}
-    
+    {{/each}} --}}
+
 </section>
 
 <section id="search">
@@ -20,44 +22,12 @@
         <input type="submit">
         <a href='/'><button>Reset</button></a>
     </form>
+    
+    {{#each data}}
+        {{>searchBookTemplate}}
+    {{/each}}
 
-    {{!-- Books Table--}}
-    <table id="books-table">
-        <thead>
-            <tr>
-                <th>title</th>
-                <th>authors</th>
-                <th>average_rating</th>
-                <th>language_code</th>
-                <th>num_pages</th>
-                <th>ratings_count</th>
-                <th>text_reviews_count</th>
-                <th>publication_date</th>
-                <th>Add Book</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {{#each books}}
-            <tr data-value={{this.bookID}}>
-                <td>{{this.title}}</td>
-                <td>{{this.authors}}</td>
-                <td>{{this.average_rating}}</td>
-                <td>{{this.language_code}}</td>
-                <td>{{this.num_pages}}</td>
-                <td>{{this.ratings_count}}</td>
-                <td>{{this.text_reviews_count}}</td>
-                <td>{{this.publication_date}}</td>
-                <td><button onclick="addUserBook({{this.bookID}})">Add</button></td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
 </section>
-
-
-<script src="./js/add_userBook.js"></script> 
-<script src="./js/delete_userBook.js"></script>
 
 
 

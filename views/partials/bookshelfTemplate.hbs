@@ -1,0 +1,9 @@
+<h2>Currently Reading</h2>
+<div class="bookshelf">
+  {{#each books}}
+    <div class="book">
+      <img src="{{cover_url}}" alt="{{title}}" />
+      <div class="book-title">{{title}}</div>
+    </div>
+  {{/each}}
+</div>

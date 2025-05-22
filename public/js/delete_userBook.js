@@ -1,4 +1,4 @@
-function deleteBook(bookID) {
+function deleteUserBook(bookID) {
     let link = '/delete-userBook-ajax/';
     let data = {
       id: bookID

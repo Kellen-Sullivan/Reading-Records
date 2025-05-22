@@ -2,7 +2,7 @@
     <div class="book-contents">
         {{!-- IMPLEMENT THIS EVENTUALLY--}}
         <div class="book-image-container">
-            <img src="https://i.ebayimg.com/images/g/u6wAAOSwwX1hN7xf/s-l400.jpg" alt="{{title}}">
+            <img src="{{image}}" alt="{{title}}">
         </div>
         <div class="book-info-container">                
             <div class="book-title">{{title}}</div>
@@ -15,7 +15,11 @@
                 <div class="progress-fill" style="width: {{progressPercentage}}%;"></div>
             </div>
 
-            <div class="book-authors">{{is_complete}}</div>
+             <div class="delete-book-button">
+                <button onclick="deleteUserBook({{bookID}})">Remove</button>
+            </div>
+
+            <div class="book-is-complete">{{is_complete}}</div>
         </div>
     </div>
 </div>

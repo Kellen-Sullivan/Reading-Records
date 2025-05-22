@@ -1,0 +1,20 @@
+<div class="book">
+    <div class="book-contents">
+        {{!-- IMPLEMENT THIS EVENTUALLY--}}
+        <div class="book-image-container">
+            <img src="https://i.ebayimg.com/images/g/u6wAAOSwwX1hN7xf/s-l400.jpg" alt="{{title}}">
+        </div>
+        <div class="book-info-container">                
+            <div class="book-title">{{title}}</div>
+            <div class="book-authors">{{authors}}</div>
+            <div class="book-language_code">Lang: {{language_code}}</div>
+            <div class="book-average_rating">Avg rating: {{average_rating}}</div>
+            <div class="book-num_pages">Pages: {{num_pages}}</div>
+            <div class="book-text_reviews_count"># text reviews: {{text_reviews_count}}</div>
+            <div class="book-publication_date">Published: {{publication_date}}</div>
+            <div class="add-book-button">
+                <button onclick="addUserBook({{bookID}})">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

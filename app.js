@@ -35,7 +35,7 @@ app.get('/', function(req, res) {
         query2 = `SELECT * FROM Books WHERE title LIKE '%${req.query.searchInput}%' OR authors LIKE '%${req.query.searchInput}%';`
     }
 
-    db.pool.query(query2, function(error, rows, fields) {
+    db.pool.query(query1, [userID], function(error, rows, fields) { // this gets userBooks
         if (error) {
             console.log(error);
             res.status(500).send("Database error");
@@ -56,9 +56,7 @@ app.get('/', function(req, res) {
             return newBook;
         });
 
-        console.log(books)
-
-        db.pool.query(query1, [userID], function(error, rows, fields) {
+        db.pool.query(query2, function(error, rows, fields) {
             if (error) {
                 console.log(error);
                 res.status(500).send("Database error");

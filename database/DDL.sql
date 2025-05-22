@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS UserBooks, Users, Books;
+DROP TABLE IF EXISTS UserBooks, Users, Books, BookCovers;
 
 CREATE TABLE Books(
     bookID int AUTO_INCREMENT UNIQUE NOT NULL,
@@ -10,6 +10,7 @@ CREATE TABLE Books(
     ratings_count int,
     text_reviews_count int,
     publication_date DATE,
+    isbn int,
     PRIMARY KEY (bookID)
 );
 
@@ -29,6 +30,13 @@ CREATE TABLE UserBooks (
     PRIMARY KEY (userID, bookID),
     FOREIGN KEY (userID) REFERENCES Users(userID) ON DELETE CASCADE,
     FOREIGN KEY (bookID) REFERENCES Books(bookID) ON DELETE CASCADE
+);
+
+CREATE TABLE BookCovers (
+    bookCoverID int NOT NULL,
+    isbn int,
+    imgURL varchar(1000),
+    PRIMARY KEY (bookCoverID)
 );
 
 INSERT INTO Users (fName, lName) VALUES ("Kellen", "Sullivan");

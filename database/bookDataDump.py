@@ -2,7 +2,7 @@ import pandas as pd
 import mysql.connector
 
 # load the csv I downloaded from kaggle
-usecols = ['bookID', 'title', 'authors', 'language_code', 'average_rating', 'num_pages', 'ratings_count', 'text_reviews_count', 'publication_date']
+usecols = ['bookID', 'title', 'authors', 'language_code', 'average_rating', 'num_pages', 'ratings_count', 'text_reviews_count', 'publication_date', 'isbn13']
 df = pd.read_csv(r"C:\Users\kelle\Downloads\books.csv", on_bad_lines='skip')
 print(df)
 
@@ -25,8 +25,8 @@ def fix_date(date):
 for index, row in df.iterrows():
     try:
         cursor.execute(
-            "INSERT INTO Books (bookID, title, authors, language_code, average_rating, num_pages, ratings_count, text_reviews_count, publication_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
-            (row['bookID'], row['title'], row['authors'], row['language_code'], row['average_rating'], row['  num_pages'], row['ratings_count'], row['text_reviews_count'], fix_date(row['publication_date']))
+            "INSERT INTO Books (bookID, title, authors, language_code, average_rating, num_pages, ratings_count, text_reviews_count, publication_date, isbn) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+            (row['bookID'], row['title'], row['authors'], row['language_code'], row['average_rating'], row['  num_pages'], row['ratings_count'], row['text_reviews_count'], fix_date(row['publication_date']), row['isbn13'])
         )
     except Exception as e:
         print(f"Error on row {index}: {e}")
