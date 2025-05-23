@@ -6,10 +6,6 @@
 
     {{>bookshelfTemplate}}
 
-    {{!-- {{#each books}}
-        {{>bookTemplate}}
-    {{/each}} --}}
-
 </section>
 
 <section id="search">
@@ -23,9 +19,11 @@
         <a href='/'><button>Reset</button></a>
     </form>
     
-    {{#each data}}
-        {{>searchBookTemplate}}
-    {{/each}}
+    <div class="search-results-grid">
+        {{#each data}}
+            {{>searchBookTemplate}}
+        {{/each}}
+    </div>
 
 </section>
 

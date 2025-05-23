@@ -54,113 +54,133 @@ header {
 
   .bookshelf {
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 20px;
-    background: #f4f1ee;
-    border-top: 5px solid #c2a671;
-    border-bottom: 5px solid #c2a671;
+    padding: 40px;
     justify-content: center;
-  }
-  
-  .book {
-    width: 120px;
-    text-align: center;
-    transition: transform 0.2s ease;
-  }
-  
-  .book img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 5px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-  }
-  
-  .book-title {
-    margin-top: 8px;
-    font-size: 0.9rem;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  .book:hover {
-    transform: scale(1.05);
-  }
-  
-  
-  /* .book {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  .book-contents {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
-    width: 100%;
-    transition: transform 0.2s ease;
-  }
-  
-  .book-contents:hover {
-    transform: scale(1.02);
-  }
-  
-  /* Book image */
-  .book-image-container img {
-    width: 120px;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Book info */
-  .book-info-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  /* Title styling */
-  .book-title {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  /* Authors and other info */
-  .book-authors {
-    font-size: 1rem;
-    color: #666;
   }
 
-  .progress-bar {
-    width: 100%;
-    background-color: #e0e0e0;
-    border-radius: 10px;
-    height: 16px;
-    overflow: hidden;
-    margin-top: 4px;
+  .shelf {
+    width: 600px;
+    border-bottom: 20px solid #c2a671;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 10px;
+    gap: 10px;
+    min-height: 200px;
   }
   
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #4caf50, #81c784);
-    width: 0%;
-    transition: width 0.4s ease-in-out;
-    border-radius: 10px 0 0 10px;
+  /* Book Styles */
+ .book {
+    height: 120px;
+    width: 28px;
+    background: red;
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .progress-labels {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 4px;
-  } */
-  
+
+  .book:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+
+  .book-info {
+    display: none;
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    background: #fffbe6;
+    color: #333;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    text-align: center;
+    z-index: 1;
+  }
+
+  .book:hover .book-info {
+    display: block;
+  }
+
+  /* book search section cards */
+
+ .book-search-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 12px;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+}
+
+.book-search-card:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.book-contents {
+  display: flex;
+  gap: 16px;
+}
+
+.book-image-container img {
+  height: 160px;
+  width: auto;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.book-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+.book-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.book-authors {
+  font-style: italic;
+  color: #666;
+}
+
+.book-info-container div {
+  font-size: 0.9em;
+  color: #333;
+}
+
+.add-book-button {
+  margin-top: auto;
+}
+
+.add-book-button button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-book-button button:hover {
+  background-color: #45a049;
+}
+
+.search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
